@@ -27,7 +27,7 @@ The plot below shows the mathematical detection engine in action across two dist
 ### 2. Geodetic Barometric Anchoring
 To ensure the Jacobian spikes aren't caused by external weather changes, the local sensor data is "anchored" to the regional aviation baseline.
 
-![Pressure Anchor](./images/images/IMAGE_B_Pressure_Anchor.png)
+![Pressure Anchor](./images/IMAGE_B_Pressure_Anchor.png)
 *Figure 2: Sentinel V1 pressure data (normalised) tracking the 1019 hPa METAR baseline. The stability of the pressure during occupancy confirms that the Jacobian spikes are local metabolic events, not atmospheric shifts.*
 
 ---
