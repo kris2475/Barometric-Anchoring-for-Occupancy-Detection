@@ -15,18 +15,19 @@ Instead of relying on absolute thresholds, I anchor my sensor data against three
 2.  **Geodetic Anchor:** I use a Hypsometric normalisation for my specific elevation (**74m ASL** in **Ammanford, Wales**). This brings my sensor to within 0.1% of aviation standards.
 3.  **Jacobian $J_{11}$ Flux:** I developed a calculation that monitors the ratio of Dew Point change to Temperature change ($dT_d / dT$). This flags human respiration before the room's thermal state even reacts.
 
+
 ## Data Visualisation & Validation
 
 ### 1. Jacobian Signal Intelligence
 The plot below shows the mathematical detection engine in action across two distinct scenarios: an artificial heater event and a pure metabolic pulse.
 
-![Jacobian Comparison](./IMAGE_A_Jacobian_Comparison.png)
+![Jacobian Comparison](./images/IMAGE_A_Jacobian_Comparison.png)
 *Figure 1: Comparison of the high-energy "Human + Heater" event (Jan 4) vs. the "Pure Metabolic Pulse" (Jan 5). The filtered blue signal identifies occupancy instantly in both cases.*
 
 ### 2. Geodetic Barometric Anchoring
 To ensure the Jacobian spikes aren't caused by external weather changes, the local sensor data is "anchored" to the regional aviation baseline.
 
-![Pressure Anchor](./IMAGE_B_Pressure_Anchor.png)
+![Pressure Anchor](./images/images/IMAGE_B_Pressure_Anchor.png)
 *Figure 2: Sentinel V1 pressure data (normalised) tracking the 1019 hPa METAR baseline. The stability of the pressure during occupancy confirms that the Jacobian spikes are local metabolic events, not atmospheric shifts.*
 
 ---
