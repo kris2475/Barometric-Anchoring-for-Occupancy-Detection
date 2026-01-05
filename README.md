@@ -1,50 +1,39 @@
 # Barometric Anchoring for Occupancy Detection
+### Sentinel V1 Technical Repository
 
-**A Thermodynamic Jacobian Approach to Mitigating Anthropogenic Noise in Edge-AI Environmental Sensors**
-
-[![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Licence: CC BY 4.0](https://img.shields.io/badge/Licence-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-
-## 🚀 Project Overview
-Traditional occupancy sensors (PIR, CO2, or Gas/VOC) often fail in unconditioned, high-stress environments due to baseline drift and sensor latency. This project introduces **Barometric Anchoring**—a methodology that treats the environment as a thermodynamic system rather than a set of static thresholds. 
-
-By applying a **Jacobian state-vector analysis**, we can isolate the "Metabolic Pulse" of a human occupant (respiration and latent heat) from natural environmental fluctuations.
-
-## 🧠 Core Innovation: The Triple-Anchor Framework
-The Sentinel V1 platform achieves high-fidelity detection by anchoring its state against three global constants:
-
-1.  **Aviation Anchor:** Real-time synchronisation with regional **METAR data (EGFF - Cardiff International)** to cancel out atmospheric pressure fronts.
-2.  **Geodetic Anchor:** Physical normalisation for site-specific elevation (**74m ASL**) at **51.787°N, -4.002°W**, ensuring <0.1% pressure variance against aviation standards.
-3.  **Jacobian $J_{11}$ Analysis:** A mathematical framework that decouples moisture flux (Dew Point) from thermal flux (Temperature) to detect presence with zero-latency.
+This project details a method for detecting human occupancy in unconditioned spaces (sub-zero temperatures) where standard PIR and VOC sensors drift or lag. By geodetically anchoring a BME688 sensor to regional aviation data (METAR) and elevation, we can isolate metabolic pulses using a Jacobian state-vector analysis.
 
 
 
-## 📊 Phase I Validation: The 45-Minute Pulse
-Phase I (Completed January 2026) utilised strictly logged data to prove the $J_{11}$ methodology in sub-zero conditions ($0.66^\circ\text{C}$). 
+## The Problem
+In my unheated office, the baseline environment is never static. Standard Edge-AI models for occupancy detection assume a stable baseline. When the temperature is 0.6°C and falling, chemical sensors (VOCs) become sluggish, and PIR sensors struggle with the thermal contrast.
 
-* **Zero-Latency Trigger:** Captured a mathematical singularity ($J_{11} \to \infty$) at the exact moment of entry (**07:29**).
-* **Chemical Override:** Successfully maintained an "Occupied" state during periods where VOC gas sensors reported false vacancies due to rising resistance.
-* **Departure Recovery:** Identified departure at **08:15** and reset to equilibrium 40 minutes faster than traditional chemical sensing.
+## The Solution: Triple-Anchor Global Normalisation
+Instead of looking for absolute thresholds, I anchor the sensor data against three external "Ground Truths":
 
-> **Read the full technical breakdown:** [Phase I Technical Report](./Phase_I_Preprint_v1.md)
+1.  **Atmospheric Anchor:** Regional pressure from **Cardiff Airport (EGFF) METARs**.
+2.  **Geodetic Anchor:** Elevation normalisation for **74m ASL** (Sketty, Swansea).
+3.  **Jacobian $J_{11}$:** A moisture-over-temperature sensitivity calculation that flags respiration before the room even begins to warm up.
 
-## 📂 Repository Structure
-* `/data`: Raw CSV logs from the Sentinel V1 (BME688 / ESP32).
-* `/scripts`: Python implementations of $J_{11}$ calculations and Hypsometric normalisation.
-* `Phase_I_Preprint_v1.md`: Detailed scientific methodology and METAR correlation data.
 
-## 📈 Phase II: The UPVC Evolution
-We are currently moving from hygroscopic cardboard housing to **non-porous UPVC enclosures**. This phase aims to isolate the sensor's recovery latency from material-based moisture retention, further refining the $J_{11}$ decay constant.
 
-## 📜 Citation & Intellectual Property
-The **Barometric Anchoring** methodology and the **$J_{11}$ Jacobian Framework** presented here are the intellectual property of **Kris Seunarine**.
+## Phase I: Proof of Concept (5 Jan 2026)
+Tested in a 45-minute occupancy window (07:30 – 08:15). 
+* **Detection:** The Jacobian recorded a singularity (instant trigger) at **07:29**.
+* **Reliability:** $J_{11}$ averaged **1.64** during occupancy, while the VOC resistance was actually rising—which would have fooled a standard sensor into thinking the room was empty.
+* **Recovery:** The system reset 40 minutes faster than the chemical sensor after departure at 08:15.
 
-If you utilise this methodology in research or commercial applications, please cite as follows:
+## Project Structure
+* `/data`: Raw CSV logs from the ESP32/BME688.
+* `Phase_I_Preprint_v1.md`: The full methodology, math, and METAR correlation table.
+* `LICENSE`: MIT (Code) & CC-BY-4.0 (Math/Method).
 
-> Seunarine, K. (2026). *Barometric Anchoring for Occupancy Detection: A Thermodynamic Jacobian Approach to Mitigating Anthropogenic Noise in Edge-AI Environmental Sensors*. Phase I Technical Report. https://github.com/kris2475/Barometric-Anchoring-for-Occupancy-Detection
+## What's Next? (Phase II)
+The cardboard housing is too hygroscopic. I’m moving the build into a **non-porous UPVC enclosure** to see if we can sharpen the recovery tail and further refine the Jacobian decay constant.
 
-## ⚖️ Licence
-* **Software/Code:** [MIT Licence](./LICENSE)
-* **Methodology/Documentation:** [Creative Commons Attribution 4.0 International (CC-BY-4.0)](https://creativecommons.org/licenses/by/4.0/)
+---
+**Citation**
+If you use this methodology, please cite:
+Seunarine, K. (2026). *Barometric Anchoring for Occupancy Detection*. GitHub: kris2475/Barometric-Anchoring-for-Occupancy-Detection
 
 
