@@ -2,7 +2,7 @@
 
 **Date:** 5 January 2026  
 **Author:** Kris Seunarine  
-**Location:** Sketty, Swansea (51.787°N, -4.002°W)  
+**Location:** Ammanford (51.787°N, -4.002°W)  
 **Status:** Phase I Complete (Logged Validation)  
 **Version:** 1.3 (UK English Standards)
 
