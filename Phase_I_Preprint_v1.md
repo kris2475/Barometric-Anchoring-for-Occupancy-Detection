@@ -4,7 +4,6 @@
 **Author:** Kris Seunarine  
 **Location:** Ammanford (51.787°N, -4.002°W)  
 **Status:** Phase I Complete (Logged Validation)  
-**Version:** 1.3 (UK English Standards)
 
 ## 1. Abstract
 Traditional occupancy detection at the edge (PIR, VOC, or CO2) is prone to baseline drift and high latency in unconditioned environments. This report introduces the **Triple-Anchor Global Normalisation (TAGN)** framework. By anchoring localised sensor data against regional aviation METARs, city-level weather APIs, and precise geodetic elevation, we isolate human "Metabolic Pulses" from natural environmental flux. 
