@@ -63,3 +63,6 @@ If you use this methodology in your own builds or research, please attribute it 
 URL: https://github.com/kris2475/Barometric-Anchoring-for-Occupancy-Detection
 
 
+[![DOI](https://zenodo.org/badge/1128216198.svg)](https://doi.org/10.5281/zenodo.18152894)
+
+
